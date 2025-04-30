@@ -1,6 +1,7 @@
 ﻿using DiamondsApi.Features.Diamonds.Commands;
 using DiamondsApi.Features.Diamonds.Queries;
 using DiamondsApi.Infrastructure;
+using DiamondsApi.Shared.Exceptions;
 using DiamondsApi.Shared.Slices;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ public static class ServiceCollectionsExtensions
         services.AddScoped<UpdateDiamondCommandHandler>();
         services.AddScoped<DeleteDiamondCommandHandler>();
         
+        services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
         services.RegisterSlices();
         

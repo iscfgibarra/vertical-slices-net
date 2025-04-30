@@ -11,14 +11,20 @@ public class CreateDiamond: ISlice
     public void AddEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/diamonds", async (
-             [FromBody] CreateDiamondCommand diamond
-            , [FromServices] CreateDiamondCommandHandler command
-            , CancellationToken cancellationToken = default) =>
-        {
-            var id = await command.Handle(diamond, cancellationToken);
-            return Results.Created($"/api/diamonds/{id}", id);
-        });
-    }
+                [FromBody] CreateDiamondCommand diamond
+                , [FromServices] CreateDiamondCommandHandler command
+                , CancellationToken cancellationToken = default) =>
+            {
+                var id = await command.Handle(diamond, cancellationToken);
+                return Results.Created($"/api/diamonds/{id}", id);
+            })
+            .WithDisplayName("CreateDiamond")
+            .WithOpenApi(operation => new(operation)
+            {
+                Summary = "Create a diamond",
+                Description = "Creates a new diamond"
+            }).Produces<int>();
+}
 }
 
 
