@@ -12,6 +12,9 @@ public static class ServiceCollectionsExtensions
     {
         services.AddScoped<CreateDiamondCommandHandler>();
         services.AddScoped<GetDiamondByIdCommandHandler>();
+        services.AddScoped<GetDiamondsCommandHandler>();
+        services.AddScoped<UpdateDiamondCommandHandler>();
+        services.AddScoped<DeleteDiamondCommandHandler>();
         
         services.AddProblemDetails();
         services.RegisterSlices();
